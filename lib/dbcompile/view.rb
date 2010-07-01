@@ -4,9 +4,8 @@ module DbCompile
       @path = File.join('views', "#{name}.sql")
     end
 
-    def read
-      source = super
-      "CREATE OR REPLACE VIEW #{name} AS #{source}"
+    def source
+      "CREATE OR REPLACE VIEW #{name} AS #{super}"
     end
   end
 end

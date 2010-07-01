@@ -6,5 +6,6 @@ module DbCompile
       path = File.join(RAILS_ROOT, 'db')
     end
     transaction = Transaction.new(path)
+    transaction.execute
   end
 end

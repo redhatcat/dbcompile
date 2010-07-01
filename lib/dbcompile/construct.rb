@@ -17,11 +17,15 @@ module DbCompile
     end
 
     # Return the SQL source.  Do any magic wrapping here.
-    def read
+    def source
       f = File.open(File.join(root_path, path))
-      source = f.read
+      data = f.read
       f.close
-      source
+      data
+    end
+
+    def execute
+      ActiveRecord::Base.connection.execute(source)
     end
   end
 end

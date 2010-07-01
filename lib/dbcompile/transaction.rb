@@ -9,10 +9,10 @@ module DbCompile
   # Encapsulates entire transaction and dependency checking
   class Transaction
     def initialize(path)
+      @path = path
       @run_queue = []
       @deps_queue = []
-      @manifest_path = File.join(path, 'dbcompile.yml')
-      @manifest = YAML::load_file(@manifest_path)
+      @manifest = YAML::load_file(File.join(path, 'dbcompile.yml'))
 
       @manifest.each{ |construct_name, data|
         if data
@@ -21,7 +21,6 @@ module DbCompile
           }
         end
       }
-      puts @run_queue.inspect
     end
 
     def install_dependencies(construct_name, object_name)
@@ -44,8 +43,14 @@ module DbCompile
       @deps_queue.pop
     end
 
-    def run
-      #klass = "DbCompile::#{construct_name.singularize.camelize}".constantize
+    def execute
+      @run_queue.each{ |construct_name, object_name|
+        klass = "DbCompile::#{construct_name.singularize.camelize}".constantize
+        construct = klass.new(object_name, @path)
+        puts "Compiling #{construct.path}"
+        Rails.logger.info "Compiling #{construct.path}"
+        construct.execute
+      }
     end
   end
 end
