@@ -27,7 +27,7 @@ e.g. you will want to use statements like *CREATE OR REPLACE FUNCTION*.
 *AS* keyword, i.e. write views as SELECTs.  DbCompile will magically wrap
 the SELECT with CREATE OR REPLACE VIEW #{script_name} AS #{sql_source}.
 
-### Adding new SQL contructs
+### Adding new SQL constructs
 
 If you want something beyond a function, trigger, or view, DbCompile is easy to
 extend.  Simply create a new class that extends *DbCompile::Construct* and
