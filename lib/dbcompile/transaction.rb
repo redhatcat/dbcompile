@@ -12,7 +12,7 @@ module DbCompile
       @path = path
       @run_queue = []
       @deps_queue = []
-      @manifest = YAML::load_file(File.join(path, 'dbcompile.yml'))
+      @manifest = YAML::load_file(File.join(path, 'compile.yml'))
 
       @manifest.each{ |construct_name, data|
         if data
