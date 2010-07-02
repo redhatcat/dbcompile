@@ -1,0 +1,16 @@
+views: # Statement type
+    asset_dashboard: # Script name.
+    # This will be translated into a filename.  Here it is db/views/asset_dashboard.sql.
+    # On views, the script name will also be the name of the view.
+    # This view has no dependencies.
+functions:
+    asset_immutable:
+    check_asset_integrity:
+        functions: # This function depends on the existence of the following functions:
+            - asset_immutable
+        views: # This function depends on the existence of the following views:
+            - asset_dashboard
+triggers:
+    check_asset_integrity:
+        functions:
+            - check_asset_integrity
