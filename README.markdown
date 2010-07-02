@@ -12,7 +12,7 @@ script/plugin install git://github.com/redhatcat/dbcompile.git
 
 Configuration is contained in one file, **RAILS_ROOT/db/compile.yml**.
 In here, you describe the statement and dependencies.  You can fine an example
-with comments [here](http://github.com/redhatcat/dbcompile/blob/master/example/dbcompile.yml).
+with comments [here](http://github.com/redhatcat/dbcompile/blob/master/example/compile.yml).
 
 The SQL scripts themselves are places in several directories under **RAILS_ROOT/db**.
 
@@ -33,4 +33,6 @@ If you want something beyond a function, trigger, or view, DbCompile is easy to
 extend.  Simply create a new class that extends *DbCompile::Construct* and
 require it in *lib/dbcompile/transaction.rb*.  See the source of
 [lib/dbcompile/view.rb](http://github.com/redhatcat/dbcompile/blob/master/lib/dbcompile/view.rb)
+and
+[lib/dbcompile/construct.rb](http://github.com/redhatcat/dbcompile/blob/master/lib/dbcompile/construct.rb)
 for reference.
