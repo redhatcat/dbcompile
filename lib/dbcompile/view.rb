@@ -5,7 +5,7 @@ module DbCompile
     end
 
     def source
-      "CREATE OR REPLACE VIEW #{name} AS #{super}"
+      "DROP VIEW IF EXISTS #{name} CASCADE; CREATE VIEW #{name} AS #{super}"
     end
   end
 end
