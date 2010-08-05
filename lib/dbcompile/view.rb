@@ -12,7 +12,7 @@ module DbCompile
       sql = nil
       case ActiveRecord::Base.connection.class.to_s
         when 'ActiveRecord::ConnectionAdapters::PostgreSQLAdapter'
-          sql = "SELECT viewname FROM pg_catalog.pg_views WHERE viewname = '#{name}'";
+          sql = "SELECT viewname FROM pg_catalog.pg_views WHERE viewname = '#{name}'"
       end
       if sql
         result = ActiveRecord::Base.connection.execute(sql)
