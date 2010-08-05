@@ -16,6 +16,11 @@ module DbCompile
     def build_path
     end
 
+    # Execute the source to create contruct in database
+    def execute
+      ActiveRecord::Base.connection.execute(source)
+    end
+
     # Return the SQL source.  Do any magic wrapping here.
     def source
       f = File.open(File.join(root_path, path))
@@ -24,8 +29,11 @@ module DbCompile
       data
     end
 
-    def execute
-      ActiveRecord::Base.connection.execute(source)
+    # Override to verify the existence of the construct
+    # Return true for verified successs
+    # Return false for verified failure
+    # Return nil otherwise
+    def verify
     end
   end
 end

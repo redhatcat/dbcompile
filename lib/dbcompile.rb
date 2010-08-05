@@ -7,5 +7,6 @@ module DbCompile
     end
     transaction = Transaction.new(path)
     transaction.execute
+    transaction.verify
   end
 end

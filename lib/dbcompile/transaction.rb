@@ -43,13 +43,37 @@ module DbCompile
       @deps_queue.pop
     end
 
+    def build_contruct(construct_name, object_name)
+      klass = "DbCompile::#{construct_name.singularize.camelize}".constantize
+      klass.new(object_name, @path)
+    end
+
     def execute
       @run_queue.each{ |construct_name, object_name|
-        klass = "DbCompile::#{construct_name.singularize.camelize}".constantize
-        construct = klass.new(object_name, @path)
-        puts "Compiling #{construct.path}"
-        Rails.logger.info "Compiling #{construct.path}"
+        construct = build_contruct(construct_name, object_name)
+        msg = "Compiling #{construct.path}"
+        puts msg
+        Rails.logger.info msg
         construct.execute
+      }
+    end
+
+    def verify
+      msg = "Verifying compilation"
+      puts msg
+      Rails.logger.info msg
+      @run_queue.each{ |construct_name, object_name|
+        construct = build_contruct(construct_name, object_name)
+        case construct.verify
+          when nil
+            msg = "#{construct_name.capitalize} #{object_name} could not be verified."
+          when true
+            msg = "#{construct_name.capitalize} #{object_name} successfully created."
+          when false
+            msg = "#{construct_name.capitalize} #{object_name} creation failed."
+        end
+        puts msg
+        Rails.logger.info msg
       }
     end
   end
