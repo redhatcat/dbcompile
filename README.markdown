@@ -36,3 +36,11 @@ require it in *lib/dbcompile/transaction.rb*.  See the source of
 and
 [lib/dbcompile/construct.rb](http://github.com/redhatcat/dbcompile/blob/master/lib/dbcompile/construct.rb)
 for reference.
+
+### How the dependencies work
+
+The dependencies of a contruct determine the order of (re)creation.  The
+consequences of not stating dependencies in the case of a view:
+
+* A view may fail being created entirely.
+* A view may be created, then deleted by DROP CASCADE of another view it depends on.
