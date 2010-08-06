@@ -16,7 +16,7 @@ module DbCompile
       end
       if sql
         result = ActiveRecord::Base.connection.execute(sql)
-        return result.rows.length == 1
+        return result.length == 1
       end
     end
   end

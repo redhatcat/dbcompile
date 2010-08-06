@@ -8,11 +8,11 @@ module DbCompile
       sql = nil
       case ActiveRecord::Base.connection.class.to_s
         when 'ActiveRecord::ConnectionAdapters::PostgreSQLAdapter'
-          sql = "select * from pg_trigger where tgname = '#{name}';"
+          sql = "SELECT * FROM pg_trigger WHERE tgname = '#{name}';"
       end
       if sql
         result = ActiveRecord::Base.connection.execute(sql)
-        return result.rows.length == 1
+        return result.length == 1
       end
     end
   end
