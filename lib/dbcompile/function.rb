@@ -12,7 +12,11 @@ module DbCompile
       end
       if sql
         result = ActiveRecord::Base.connection.execute(sql)
-        return result.length == 1
+        if ActiveRecord::Base.connection.is_a? ActiveRecord::ConnectionAdapters::PostgreSQLAdapter
+          return result.num_tuples == 1
+        else
+          return result.length == 1
+        end
       end
     end
   end
