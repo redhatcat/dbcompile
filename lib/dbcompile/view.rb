@@ -14,10 +14,7 @@ module DbCompile
         when 'ActiveRecord::ConnectionAdapters::PostgreSQLAdapter'
           sql = "SELECT viewname FROM pg_catalog.pg_views WHERE viewname = '#{name}'"
       end
-      if sql
-        result = ActiveRecord::Base.connection.execute(sql)
-        return result.count == 1
-      end
+      return does_one_exist?(sql)
     end
   end
 end

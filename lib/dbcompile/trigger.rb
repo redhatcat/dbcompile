@@ -10,10 +10,7 @@ module DbCompile
         when 'ActiveRecord::ConnectionAdapters::PostgreSQLAdapter'
           sql = "SELECT * FROM pg_trigger WHERE tgname = '#{name}';"
       end
-      if sql
-        result = ActiveRecord::Base.connection.execute(sql)
-        return result.length == 1
-      end
+      does_one_exist?(sql)
     end
   end
 end

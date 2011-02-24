@@ -10,14 +10,7 @@ module DbCompile
         when 'ActiveRecord::ConnectionAdapters::PostgreSQLAdapter'
           sql = "SELECT proname FROM pg_proc WHERE proname = '#{name.downcase}';"
       end
-      if sql
-        result = ActiveRecord::Base.connection.execute(sql)
-        if ActiveRecord::Base.connection.is_a? ActiveRecord::ConnectionAdapters::PostgreSQLAdapter
-          return result.num_tuples == 1
-        else
-          return result.length == 1
-        end
-      end
+      return does_one_exist?(sql) if sql
     end
   end
 end
