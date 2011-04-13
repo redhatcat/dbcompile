@@ -42,8 +42,15 @@ module DbCompile
     #
     def does_one_exist?(sql)
       result = ActiveRecord::Base.connection.execute(sql)
-      if ActiveRecord::Base.connection.is_a? ActiveRecord::ConnectionAdapters::PostgreSQLAdapter
+      case ActiveRecord::Base.connection.class.to_s
+      when "ActiveRecord::ConnectionAdapters::PostgreSQLAdapter"
         return result.num_tuples == 1
+      when "ActiveRecord::ConnectionAdapters::OracleEnhancedAdapter"
+        row_count= 0
+        while f = result.fetch
+          row_count += 1
+        end
+        return row_count == 1
       else
         return result.length == 1
       end
