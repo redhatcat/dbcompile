@@ -53,7 +53,7 @@ module DbCompile
         construct = build_contruct(construct_name, object_name)
         msg = "Compiling #{construct.path}"
         puts msg
-        Rails.logger.info msg
+        ActiveRecord::Base.logger.info msg
         construct.execute
       }
     end
@@ -61,7 +61,7 @@ module DbCompile
     def verify
       msg = "Verifying compilation"
       puts msg
-      Rails.logger.info msg
+      ActiveRecord::Base.logger.info msg
       @run_queue.each{ |construct_name, object_name|
         construct = build_contruct(construct_name, object_name)
         case construct.verify
@@ -73,7 +73,7 @@ module DbCompile
             msg = "#{construct_name.capitalize} #{object_name} creation failed."
         end
         puts msg
-        Rails.logger.info msg
+        ActiveRecord::Base.logger.info msg
       }
     end
   end
