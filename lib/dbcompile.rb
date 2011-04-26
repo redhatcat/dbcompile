@@ -7,6 +7,8 @@ module DbCompile
     end
     transaction = Transaction.new(path)
     transaction.execute
-    transaction.verify
+    if not transaction.verify
+      exit 1
+    end
   end
 end

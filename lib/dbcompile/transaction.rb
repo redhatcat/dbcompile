@@ -62,6 +62,7 @@ module DbCompile
       msg = "Verifying compilation"
       puts msg
       ActiveRecord::Base.logger.info msg
+      no_errors = true
       @run_queue.each{ |construct_name, object_name|
         construct = build_contruct(construct_name, object_name)
         case construct.verify
@@ -71,10 +72,12 @@ module DbCompile
             msg = "#{construct_name.capitalize} #{object_name} successfully created."
           when false
             msg = "#{construct_name.capitalize} #{object_name} creation failed."
+            no_errors = false
         end
         puts msg
         ActiveRecord::Base.logger.info msg
       }
+      return no_errors
     end
   end
 end
