@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "dbcompile"
-  s.version = "0.0.1"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tyler Lesmann"]
@@ -22,6 +22,8 @@ Gem::Specification.new do |s|
     "README.markdown",
     "Rakefile",
     "VERSION",
+    "dbcompile.gemspec",
+    "example/compile.empty.yml",
     "example/compile.yml",
     "lib/dbcompile.rb",
     "lib/dbcompile/construct.rb",
