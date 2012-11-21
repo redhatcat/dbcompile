@@ -10,15 +10,15 @@ script/plugin install git://github.com/redhatcat/dbcompile.git
 
 ### Setup
 
-Configuration is contained in one file, **RAILS_ROOT/db/compile.yml**.
+Configuration is contained in one file, **#{Rails.root}/db/compile.yml**.
 In here, you describe the statement and dependencies.  You can fine an example
 with comments [here](http://github.com/redhatcat/dbcompile/blob/master/example/compile.yml).
 
-The SQL scripts themselves are places in several directories under **RAILS_ROOT/db**.
+The SQL scripts themselves are places in several directories under **#{Rails.root}/db**.
 
-* RAILS_ROOT/db/functions contains function scripts.
-* RAILS_ROOT/db/triggers contains trigger scripts.
-* RAILS_ROOT/db/views contains view scripts.
+* #{Rails.root}/db/functions contains function scripts.
+* #{Rails.root}/db/triggers contains trigger scripts.
+* #{Rails.root}/db/views contains view scripts.
 
 All of these scripts, with the exception of views, should be self replacing,
 e.g. you will want to use statements like *CREATE OR REPLACE FUNCTION*.
